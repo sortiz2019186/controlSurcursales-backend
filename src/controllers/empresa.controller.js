@@ -20,7 +20,7 @@ function crearEmpresa(req, res) {
         }
 
         if (!empresaCreada) {
-            return res.status(500).send({ ok: false, message: 'Error al crear el usuario.' });
+            return res.status(500).send({ ok: false, message: 'Error al crear la empresa.' });
         }
 
         return res.status(200).send({ ok: true, empresaCreada });
@@ -49,7 +49,22 @@ function login(req, res) {
     });
 }
 
-// === MODIFICAR USUARIO ===
+// === OBTENER EMPRESAS ===
+function obtenerEmpresas(req, res) {
+    Empresa.find((err, empresasEncontradas) => {
+        if (err) {
+            return res.status(500).send({ ok: false, message: 'Hubo un error en la petición.' });
+        }
+
+        if (!empresasEncontradas) {
+            return res.status(404).send({ ok: false, message: 'Error en la consulta o no existen datos.' })
+        }
+
+        return res.status(200).send({ ok: true, empresasEncontradas });
+    });
+}
+
+// === MODIFICAR EMPRESA ===
 function modificarEmpresa(req, res) {
     let tokenUser = req.usuario;
     let body = req.body;
@@ -69,7 +84,7 @@ function modificarEmpresa(req, res) {
     });
 }
 
-// === ELIMINAR USUARIO ===
+// === ELIMINAR EMPRESA ===
 function eliminarEmpresa(req, res) {
     let tokenUser = req.usuario;
 
@@ -90,5 +105,6 @@ module.exports = {
     crearEmpresa,
     login,
     modificarEmpresa,
-    eliminarEmpresa
+    eliminarEmpresa,
+    obtenerEmpresas
 }

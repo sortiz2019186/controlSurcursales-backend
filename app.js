@@ -7,6 +7,7 @@ const app = express();
 
 // === Importación de Rutas ===
 let empresaRutas = require('./src/routes/empresa.route');
+let sucursalRutas = require('./src/routes/sucursal.route');
 
 // === Middlewares ===
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -16,6 +17,6 @@ app.use(bodyParser.json());
 // app.use(cors());
 
 // === Aplicación de Rutas ===
-app.use('/api', empresaRutas);
+app.use('/api', empresaRutas, sucursalRutas);
 
 module.exports = app;

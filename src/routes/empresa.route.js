@@ -12,5 +12,6 @@ api.post('/crearEmpresa', [verificarToken, verificarAdminRole], empresaControlle
 api.post('/login', empresaController.login);
 api.put('/modificarEmpresa', [verificarToken, verificarAdminRole], empresaController.modificarEmpresa);
 api.delete('/eliminarEmpresa', [verificarToken, verificarAdminRole], empresaController.eliminarEmpresa);
+api.get('/obtenerEmpresas', [verificarToken, verificarAdminRole], empresaController.obtenerEmpresas);
 
 module.exports = api;
