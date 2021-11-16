@@ -106,5 +106,6 @@ module.exports = {
     login,
     modificarEmpresa,
     eliminarEmpresa,
-    obtenerEmpresas
+    obtenerEmpresas,
+    obtenerEmpresa
 }
