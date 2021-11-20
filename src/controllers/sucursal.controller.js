@@ -27,7 +27,7 @@ function crearSucursal(req, res) {
 
 // === OBTENER SUCURSALES ===
 function obtenerSucursales(req, res) {
-    Sucursal.find((err, sucursalesEncontradas) => {
+    Sucursal.find().populate().exec((err, sucursalesEncontradas) => {
         if (err) {
             return res.status(500).send({ ok: false, message: 'Hubo un error en la petición.' });
         }
