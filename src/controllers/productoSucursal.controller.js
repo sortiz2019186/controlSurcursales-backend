@@ -8,7 +8,8 @@ function crearProduto(req, res) {
     let productoSucursal = new ProductoSucursal({
         nombreProducto: body.nombreProducto,
         stockExistente: body.stockExistente,
-        cantidadVendida: body.cantidadVendida
+        cantidadVendida: body.cantidadVendida,
+        idSucursal: body.idSucursal
     });
 
     productoSucursal.save((err, productoCreado) => {
@@ -26,7 +27,7 @@ function crearProduto(req, res) {
 
 // === OBTENER PRODUCTOS ===
 function obtenerProductos(req, res) {
-    ProductoSucursal.find((err, productosEncontrados) => {
+    ProductoSucursal.find().populate('sucursal', 'nombreSucursal').exec((err, productosEncontrados) => {
         if (err) {
             return res.status(500).send({ ok: false, message: 'Hubo un error en la petición.' });
         }
@@ -60,6 +61,8 @@ function obtenerProducto(req, res) {
 function modificarProducto(req, res) {
     let id = req.params.id;
     let body = req.body;
+
+    delete body.idSucursal;
 
     ProductoSucursal.findByIdAndUpdate(id, body, { new: true, useFindAndModify: true }, (err, productoModificado) => {
         if (err) {
