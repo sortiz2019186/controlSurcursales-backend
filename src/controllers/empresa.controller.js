@@ -64,6 +64,23 @@ function obtenerEmpresas(req, res) {
     });
 }
 
+// === OBTENER EMPRESA ===
+function obtenerEmpresa(req, res) {
+    let id = req.usuario.sub;
+
+    Empresa.findOne({ _id: id }, (err, empresaEncontrada) => {
+        if (err) {
+            return res.status(500).send({ ok: false, err });
+        }
+
+        if (!empresaEncontrada) {
+            return res.status(404).send({ ok: false, message: 'El ID ingresado no existe.' });
+        }
+
+        return res.status(200).send({ ok: true, empresaEncontrada })
+    });
+}
+
 // === MODIFICAR EMPRESA ===
 function modificarEmpresa(req, res) {
     let tokenUser = req.usuario;
@@ -107,4 +124,5 @@ module.exports = {
     modificarEmpresa,
     eliminarEmpresa,
     obtenerEmpresas,
+    obtenerEmpresa
 }

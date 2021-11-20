@@ -13,5 +13,6 @@ api.post('/login', empresaController.login);
 api.put('/modificarEmpresa', [verificarToken, verificarAdminRole], empresaController.modificarEmpresa);
 api.delete('/eliminarEmpresa', [verificarToken, verificarAdminRole], empresaController.eliminarEmpresa);
 api.get('/obtenerEmpresas', [verificarToken, verificarAdminRole], empresaController.obtenerEmpresas);
+api.get('/obtenerEmpresa', [verificarToken, verificarAdminRole], empresaController.obtenerEmpresa);
 
 module.exports = api;
